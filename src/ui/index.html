@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https: http:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Framium</title>
+  <link rel="stylesheet" href="ui.css">
+</head>
+<body data-theme="midnight">
+  <div class="app-backdrop"></div>
+
+  <aside class="workspace-rail" id="workspaceRail">
+    <div class="rail-brand drag-region">
+      <div class="brand-lockup no-drag" title="Framium">
+        <img class="dynamic-logo brand-logo" id="brandLogo" src="../../assets/logo-halo.svg" alt="">
+        <span class="rail-label brand-name">Framium</span>
+      </div>
+      <button class="icon-button no-drag" id="collapseSidebar" title="Compact sidebar" aria-label="Toggle compact sidebar">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg>
+      </button>
+    </div>
+
+    <div class="amnesia-banner hidden" id="amnesiaPill"><span></span><b class="rail-label">Amnesia</b></div>
+
+    <nav class="navigation-row" aria-label="Page navigation">
+      <button class="icon-button" data-nav="back" id="backButton" title="Back" aria-label="Back"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+      <button class="icon-button" data-nav="forward" id="forwardButton" title="Forward" aria-label="Forward"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+      <button class="icon-button" data-nav="reload" id="reloadButton" title="Reload" aria-label="Reload"><svg class="reload-icon" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg><svg class="stop-icon" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1"/></svg></button>
+      <button class="icon-button" data-nav="home" title="Home" aria-label="Home"><svg viewBox="0 0 24 24"><path d="m4 11 8-7 8 7"/><path d="M6 10v10h12V10"/></svg></button>
+    </nav>
+
+    <button class="new-tab-button" id="newTab"><span class="plus">+</span><span class="rail-label">New tab</span><kbd class="rail-label">Ctrl T</kbd></button>
+
+    <div class="section-caption rail-label"><span>OPEN TABS</span><span id="tabCount">0</span></div>
+    <div class="tab-strip" id="tabStrip" role="tablist" aria-label="Open tabs"></div>
+
+    <footer class="rail-footer">
+      <button class="rail-action" data-library="bookmarks" title="Bookmarks"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg><span class="rail-label">Bookmarks</span></button>
+      <button class="rail-action" data-library="history" title="History"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg><span class="rail-label">History</span></button>
+      <button class="rail-action" id="downloadsButton" title="Downloads"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/></svg><span class="rail-label">Downloads</span><span class="download-badge hidden" id="downloadBadge">0</span></button>
+      <button class="rail-action vanish-action" id="vanishTab" title="Open this page in an isolated tab that erases itself"><svg viewBox="0 0 24 24"><path d="M12 3c4 4 7 7.3 7 11a7 7 0 0 1-14 0c0-3.7 3-7 7-11Z"/><path d="M9 15c.5 1.5 1.5 2.3 3 2.5"/></svg><span class="rail-label">Vanish this tab</span></button>
+      <div class="footer-separator"></div>
+      <button class="rail-action accent-action" id="newAmnesia" title="New Amnesia window"><svg viewBox="0 0 24 24"><path d="M5 20c4-1 10-1 14 0l-2-9a5 5 0 0 0-10 0l-2 9Z"/><circle cx="9.5" cy="14.5" r="1.5"/><circle cx="14.5" cy="14.5" r="1.5"/></svg><span class="rail-label">New Amnesia</span></button>
+      <button class="rail-action" id="settingsButton" title="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.1h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H3v-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6V3h4v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.1v4H21a1.7 1.7 0 0 0-1.6 1Z"/></svg><span class="rail-label">Settings</span></button>
+    </footer>
+  </aside>
+
+  <header class="floating-toolbar drag-region">
+    <form class="address-shell no-drag" id="addressForm">
+      <button type="button" class="site-indicator" id="siteIndicator" aria-label="Connection information">
+        <svg class="lock-icon" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      </button>
+      <input id="addressInput" autocomplete="off" spellcheck="false" aria-label="Search or enter address" placeholder="Search or enter an address">
+      <span class="address-mode" id="addressMode"></span>
+      <button type="button" class="address-action" id="bookmarkButton" title="Bookmark page" aria-label="Bookmark page"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></button>
+    </form>
+
+    <button class="privacy-chip no-drag" id="privacyButton" title="Tracking protection"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.9 8.4 7 10 4.1-1.6 7-5.3 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span id="blockedCount">0</span></button>
+    <div class="window-controls no-drag">
+      <button id="minimizeWindow" aria-label="Minimize">−</button>
+      <button id="maximizeWindow" aria-label="Maximize">□</button>
+      <button id="closeWindow" class="close-window" aria-label="Close">×</button>
+    </div>
+    <div class="load-progress" id="loadProgress"></div>
+  </header>
+
+  <aside class="library-drawer hidden" id="libraryDrawer">
+    <div class="drawer-title"><div><span class="eyebrow">LIBRARY</span><h2 id="libraryTitle">Bookmarks</h2></div><button id="closeLibrary" aria-label="Close">×</button></div>
+    <label class="drawer-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="librarySearch" placeholder="Search" autocomplete="off"></label>
+    <div class="drawer-actions" id="libraryActions"></div>
+    <div class="library-list" id="libraryList"></div>
+  </aside>
+
+  <section class="find-bar hidden" id="findBar">
+    <input id="findInput" placeholder="Find in page" autocomplete="off">
+    <button id="findPrevious" title="Previous">↑</button><button id="findNext" title="Next">↓</button><button id="closeFind" title="Close">×</button>
+  </section>
+
+  <div class="modal-layer hidden" id="settingsLayer">
+    <section class="settings-view" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <header class="settings-head">
+        <div class="settings-lockup"><img class="dynamic-logo" src="../../assets/logo-halo.svg" alt=""><div><span class="eyebrow">FRAMIUM</span><h1 id="settingsTitle">Settings</h1></div></div>
+        <button id="closeSettings" aria-label="Close settings">×</button>
+      </header>
+      <div class="settings-grid">
+        <article class="setting-card">
+          <span class="card-number">01</span><h2>Search</h2>
+          <label for="searchEngineSelect">Default provider</label><select id="searchEngineSelect"></select>
+          <p>Address-bar shortcuts work too: <code>d privacy</code>, <code>w browser</code>, or <code>g query</code>.</p>
+        </article>
+        <article class="setting-card">
+          <span class="card-number">02</span><h2>Appearance</h2>
+          <label for="themeSelect">Surface</label><select id="themeSelect"><option value="midnight">Obsidian</option><option value="graphite">Graphite</option><option value="light">Cloud</option></select>
+          <div class="two-fields"><div><label for="accentInput">Accent</label><input type="color" id="accentInput" value="#8b5cf6"></div><div><label for="logoSelect">Mark</label><select id="logoSelect"><option value="halo">Halo</option><option value="portal">Portal</option><option value="fold">Fold</option></select></div></div>
+        </article>
+        <article class="setting-card">
+          <span class="card-number">03</span><h2>Interface</h2>
+          <label class="toggle-row"><span><b>Compact sidebar</b><small>Icons only, more room for the web.</small></span><input type="checkbox" id="compactToggle"></label>
+          <label class="toggle-row"><span><b>Restore tabs</b><small>Continue your normal session at startup.</small></span><input type="checkbox" id="restoreToggle"></label>
+        </article>
+        <article class="setting-card">
+          <span class="card-number">04</span><h2>Privacy</h2>
+          <label class="toggle-row"><span><b>Block known trackers</b><small>Local starter rules; no browsing data is uploaded.</small></span><input type="checkbox" id="trackerToggle"></label>
+          <button class="danger-button" id="clearData">Clear site data and history</button>
+        </article>
+        <article class="setting-card">
+          <span class="card-number">05</span><h2>Downloads</h2>
+          <label class="toggle-row"><span><b>Ask where to save</b><small>Off means one click saves directly to Downloads.</small></span><input type="checkbox" id="askDownloadToggle"></label>
+          <button class="secondary-button download-settings-button" id="openDownloadsFromSettings">Open download manager</button>
+        </article>
+        <article class="setting-card wide-card">
+          <span class="card-number">06</span><h2>Extensions</h2>
+          <p>Load unpacked Chromium extensions. Some Chrome-only APIs are not available in Electron.</p>
+          <div class="extension-list" id="extensionList"></div>
+          <button class="secondary-button" id="loadExtension">Load unpacked extension</button>
+        </article>
+        <article class="setting-card amnesia-card">
+          <span class="card-number">07</span><h2>Amnesia</h2>
+          <p>Temporary cookies, permissions, cache, and site storage disappear with the window. Downloads remain on disk.</p>
+          <button class="primary-button" id="openAmnesiaFromSettings">Open Amnesia window</button>
+        </article>
+        <article class="setting-card about-card">
+          <span class="card-number">08</span><h2>About</h2>
+          <div class="about-line"><img class="dynamic-logo" src="../../assets/logo-halo.svg" alt=""><div><b>Framium <span id="versionText"></span></b><small>Open-source Chromium browser.</small></div></div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-layer palette-layer hidden" id="paletteLayer">
+    <section class="palette-card spotlight-card" role="dialog" aria-modal="true" aria-label="Framium Spotlight">
+      <div class="spotlight-heading"><div><img class="dynamic-logo" src="../../assets/logo-halo.svg" alt=""><span>Framium Spotlight</span></div><kbd>Alt L</kbd></div>
+      <div class="palette-input-row"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="paletteInput" placeholder="Search tabs, history, commands, or the web…"><kbd>Esc</kbd></div>
+      <div class="palette-results" id="paletteResults"></div>
+    </section>
+  </div>
+
+  <div class="tab-menu hidden" id="tabMenu">
+    <button data-tab-action="vanish">Open as Vanish tab</button><button data-tab-action="duplicate">Duplicate</button><button data-tab-action="mute">Mute / unmute</button><button data-tab-action="pin">Pin / unpin</button><hr><button data-tab-action="close-others">Close others</button><button data-tab-action="close-right">Close tabs below</button><button data-tab-action="close">Close</button>
+  </div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

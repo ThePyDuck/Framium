@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https: http:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Framium Home</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body data-background="aurora">
+  <div class="background-photo" id="backgroundPhoto"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="home-header">
+    <div class="home-brand"><span class="home-logo"><img id="homeLogo" src="logo-halo.svg" alt=""></span><span>Framium</span></div>
+    <div class="header-actions">
+      <span class="mode-pill hidden" id="modePill"><span></span><b id="modeLabel">Amnesia session</b></span>
+      <button id="customizeButton" class="round-button" aria-label="Customize Home" title="Customize Home">
+        <svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15.5 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.14.37.36.7.66.96.3.27.69.42 1.1.44H21a2 2 0 1 1 0 4h-.09c-.65 0-1.23.37-1.51.6Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="home-shell">
+    <section class="hero" id="greetingBlock">
+      <p id="dateLine"></p>
+      <h1 id="greeting">Welcome home.</h1>
+      <p class="hero-subtitle" id="heroSubtitle">Your space. Your rhythm. Your web.</p>
+    </section>
+
+    <form class="search-box" id="searchForm">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      <input id="searchInput" autocomplete="off" spellcheck="false" aria-label="Search the web" placeholder="Search the web">
+      <span id="engineBadge">Google</span>
+    </form>
+
+    <div class="widget-grid" id="widgetGrid">
+      <section class="widget clock-widget wide" data-widget="clock" draggable="true">
+        <div class="drag-handle" title="Drag to rearrange">⠿</div>
+        <div>
+          <span class="clock-time" id="clockTime">00:00</span>
+          <span class="clock-seconds" id="clockSeconds">00</span>
+        </div>
+        <p id="clockDate"></p>
+      </section>
+
+      <section class="widget links-widget wide" data-widget="quickLinks" draggable="true">
+        <div class="widget-heading"><div><span class="kicker">QUICK ACCESS</span><h2>Places</h2></div><span class="drag-handle" title="Drag to rearrange">⠿</span></div>
+        <div class="quick-links" id="quickLinks"></div>
+      </section>
+
+      <section class="widget notes-widget" data-widget="notes" draggable="true">
+        <div class="widget-heading"><div><span class="kicker">LOCAL</span><h2>Scratchpad</h2></div><span class="drag-handle" title="Drag to rearrange">⠿</span></div>
+        <textarea id="notesInput" aria-label="Local notes" placeholder="A thought, a task, a reminder…"></textarea>
+        <span class="save-status" id="saveStatus">Saved locally</span>
+      </section>
+
+      <section class="widget recent-widget" data-widget="recent" draggable="true">
+        <div class="widget-heading"><div><span class="kicker">CONTINUE</span><h2>Recent</h2></div><span class="drag-handle" title="Drag to rearrange">⠿</span></div>
+        <div class="recent-list" id="recentList"></div>
+      </section>
+
+      <section class="widget privacy-widget" data-widget="privacy" draggable="true">
+        <div class="widget-heading"><div><span class="kicker">PRIVACY</span><h2>Protection</h2></div><span class="drag-handle" title="Drag to rearrange">⠿</span></div>
+        <div class="privacy-stat"><span class="shield-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.9 8.4 7 10 4.1-1.6 7-5.3 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span><div><strong id="privacyCount">0</strong><small>tracking requests blocked in this window</small></div></div>
+      </section>
+    </div>
+  </main>
+
+  <aside class="customize-drawer hidden" id="customizeDrawer">
+    <div class="drawer-heading"><div><span class="kicker">MAKE IT YOURS</span><h2>Customize Home</h2></div><button id="closeCustomize" aria-label="Close">×</button></div>
+    <div class="drawer-section">
+      <h3>Atmosphere</h3>
+      <div class="background-options">
+        <button data-background="aurora" class="aurora" aria-label="Aurora"></button>
+        <button data-background="ember" class="ember" aria-label="Ember"></button>
+        <button data-background="ocean" class="ocean" aria-label="Ocean"></button>
+        <button data-background="mono" class="mono" aria-label="Monochrome"></button>
+        <button data-background="light" class="light" aria-label="Light"></button>
+      </div>
+      <div class="image-actions">
+        <button id="chooseBackgroundImage">Choose image</button>
+        <button id="removeBackgroundImage" class="hidden">Remove image</button>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <h3>Glass</h3>
+      <label class="range-row" for="opacityRange"><span>Panel opacity</span><output id="opacityValue">62%</output></label>
+      <input class="range-control" id="opacityRange" type="range" min="20" max="96" step="1" value="62">
+      <label class="range-row" for="blurRange"><span>Background blur</span><output id="blurValue">24px</output></label>
+      <input class="range-control" id="blurRange" type="range" min="0" max="48" step="1" value="24">
+    </div>
+    <div class="drawer-section">
+      <h3>Visible widgets</h3>
+      <div class="widget-toggles" id="widgetToggles"></div>
+    </div>
+    <div class="drawer-section">
+      <h3>Browser appearance</h3>
+      <p>Change the browser theme, accent color, search provider, and privacy settings.</p>
+      <button class="open-settings" id="openBrowserSettings">Open browser settings</button>
+    </div>
+    <p class="drawer-tip">Tip: drag widgets by the ⠿ handle to rearrange your Home.</p>
+  </aside>
+
+  <script src="home.js"></script>
+</body>
+</html>

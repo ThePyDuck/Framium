@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Downloads</title>
+  <link rel="stylesheet" href="downloads.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="page-head">
+      <div class="title-lockup">
+        <img src="logo-halo.svg" alt="">
+        <div><span class="eyebrow">FRAMIUM LIBRARY</span><h1>Downloads</h1></div>
+      </div>
+      <div class="head-actions">
+        <button class="quiet-button" id="openFolder">Open folder</button>
+        <button class="quiet-button" id="clearCompleted">Clear completed</button>
+      </div>
+    </header>
+
+    <section class="summary">
+      <div><strong id="totalCount">0</strong><span>items</span></div>
+      <div><strong id="activeCount">0</strong><span>active</span></div>
+      <p id="downloadLocation"></p>
+    </section>
+
+    <section class="control-row">
+      <div class="filters" role="tablist" aria-label="Download filters">
+        <button class="active" data-filter="all">All</button>
+        <button data-filter="progressing">Active</button>
+        <button data-filter="completed">Completed</button>
+        <button data-filter="issues">Issues</button>
+      </div>
+      <label class="search-field">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="downloadSearch" type="search" placeholder="Search downloads" autocomplete="off">
+      </label>
+    </section>
+
+    <section class="download-list" id="downloadList"></section>
+  </main>
+  <script src="downloads.js"></script>
+</body>
+</html>

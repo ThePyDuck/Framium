@@ -1,0 +1,67 @@
+{
+  "name": "framium-browser",
+  "version": "0.4.0",
+  "description": "Framium — a private, customizable open-source Chromium browser",
+  "main": "src/main.js",
+  "author": {
+    "name": "Framium Contributors",
+    "email": "framium@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/framium-browser/framium",
+  "desktopName": "framium.desktop",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "check": "node --check src/main.js && node --check src/store.js && node --check src/preload.js && node --check src/tab-preload.js && node --check src/ui/app.js && node --check src/home/home.js && node --check src/downloads/downloads.js",
+    "pack": "electron-builder --dir",
+    "build:linux": "electron-builder --linux AppImage deb",
+    "build:windows": "electron-builder --win nsis portable"
+  },
+  "devDependencies": {
+    "electron": "44.4.5",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "org.framium.browser",
+    "productName": "Framium",
+    "asar": true,
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json",
+      "LICENSE"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Network;WebBrowser",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "executableName": "framium",
+      "syncDesktopName": true,
+      "maintainer": "Framium Contributors <framium@users.noreply.github.com>"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
