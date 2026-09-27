@@ -40,7 +40,7 @@ Framium is an open-source desktop browser built around a clean vertical workspac
 
 ### Windows
 
-[**Download Framium Setup 0.4.0**](https://github.com/ThePyDuck/Framium/releases/download/public/Framium.Setup.0.4.0.exe)
+[**Download Framium Setup 0.5.0**](https://github.com/ThePyDuck/Framium/releases/download/0.5.0-Glass/Framium.Setup.0.5.0.exe)
 
 Additional packages can be published through [GitHub Releases](https://github.com/ThePyDuck/Framium/releases).
 
